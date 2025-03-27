@@ -1,0 +1,40 @@
+name: etherdoxshefzysms
+service:
+  name: api
+  env:
+    - name: NODE_ENV
+      value: production
+    - name: HOST
+      value: 0.0.0.0
+    - name: PORT
+      value: 5000
+  ports:
+    - port: 5000
+      protocol: http
+  routes:
+    - path: /
+  instance_types:
+    - type: nano
+  regions:
+    - fra
+  buildpacks:
+    - nodejs
+  health_checks:
+    liveness:
+      http:
+        path: /api/health
+        port: 5000
+    readiness:
+      http:
+        path: /api/health
+        port: 5000
+  scalings:
+    max_instances: 1
+    min_instances: 1
+  environment_variables:
+    - key: KOYEB_HOST
+      value: "true"
+    - key: SESSION_SECRET
+      value: "ETHERDOXSHEFZYSMSSecureKey2025!"
+    - key: DATABASE_URL
+      value: "postgresql://demon:CK7n1R98DvUxYr-9uH15ng@foiled-parrot-5434.jxf.gcp-europe-west3.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full"
